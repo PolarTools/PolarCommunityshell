@@ -37,7 +37,7 @@ Clear-Host
 
 # Configuration
 $pluginName = "PolarTools"
-$pluginLink = "https://github.com/MDQI1/PolarTools/releases/download/v1.8.8/PolarTools_v1.8.8.zip"
+$pluginLink = "https://github.com/MDQI1/PolarTools/releases/download/v1.9.0/PolarTools_v1.9.0.zip"
 $oldPluginNames = @("luatools", "manilua", "stelenium", "PolarTools")
 
 # Hide progress bar for faster downloads
