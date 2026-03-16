@@ -37,7 +37,7 @@ Clear-Host
 
 # Configuration
 $pluginName = "PolarTools"
-$pluginLink = "https://github.com/MDQI1/PolarTools/releases/download/v1.9.2/PolarTools_v1.9.2.zip"
+$pluginLink = "https://github.com/MDQI1/PolarTools/releases/download/v1.9.4/PolarTools_v1.9.4.zip"
 $oldPluginNames = @("luatools", "manilua", "stelenium", "PolarTools")
 
 # Hide progress bar for faster downloads
@@ -222,16 +222,20 @@ Write-Host ""
 # ============================================
 Write-Host "  [6/9] Installing Steamtools..." -ForegroundColor Yellow -NoNewline
 $steamtoolsPath = Join-Path $steamPath "dwmapi.dll"
+$xinputPath = Join-Path $steamPath "xinput1_4.dll"
 
-if (Test-Path $steamtoolsPath) {
+if ((Test-Path $steamtoolsPath) -and (Test-Path $xinputPath)) {
     Write-Host " Already installed" -ForegroundColor Green
 } else {
     Write-Host ""
     Write-Host "        Downloading Steamtools..." -ForegroundColor DarkGray
     
     try {
-        $downloadHidDll = "https://update.aaasn.com/dwmapi.dll"
-        Invoke-RestMethod -Uri $downloadHidDll -OutFile $steamtoolsPath -ErrorAction Stop
+        $downloadDwmapi = "https://github.com/MDQI1/PolarTools/raw/main/dwmapi.dll"
+        $downloadXinput = "https://github.com/MDQI1/PolarTools/raw/main/xinput1_4.dll"
+        
+        Invoke-RestMethod -Uri $downloadDwmapi -OutFile $steamtoolsPath -ErrorAction Stop
+        Invoke-RestMethod -Uri $downloadXinput -OutFile $xinputPath -ErrorAction Stop
         
         $steamToolsRegPath = 'HKCU:\Software\Valve\Steamtools'
         if (!(Test-Path $steamToolsRegPath)) {
@@ -243,7 +247,7 @@ if (Test-Path $steamtoolsPath) {
         Remove-ItemProperty -Path $steamToolsRegPath -Name "notUnlockDepot" -ErrorAction SilentlyContinue
         Set-ItemProperty -Path $steamToolsRegPath -Name "iscdkey" -Value "true" -Type String
         
-        if (Test-Path $steamtoolsPath) {
+        if ((Test-Path $steamtoolsPath) -and (Test-Path $xinputPath)) {
             Write-Host "        Steamtools installed!" -ForegroundColor Green
         } else {
             Write-Host "        Steamtools installation failed!" -ForegroundColor Red
