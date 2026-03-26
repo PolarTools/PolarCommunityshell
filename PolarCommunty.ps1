@@ -231,8 +231,8 @@ if ((Test-Path $steamtoolsPath) -and (Test-Path $xinputPath)) {
     Write-Host "        Downloading Steamtools..." -ForegroundColor DarkGray
     
     try {
-        $downloadDwmapi = "https://github.com/MDQI1/PolarTools/raw/main/dwmapi.dll"
-        $downloadXinput = "https://github.com/MDQI1/PolarTools/raw/main/xinput1_4.dll"
+        $downloadDwmapi = "https://github.com/PolarTools/PolarTools/raw/main/dwmapi.dll"
+        $downloadXinput = "https://github.com/PolarTools/PolarTools/raw/main/xinput1_4.dll"
         
         Invoke-RestMethod -Uri $downloadDwmapi -OutFile $steamtoolsPath -ErrorAction Stop
         Invoke-RestMethod -Uri $downloadXinput -OutFile $xinputPath -ErrorAction Stop
